@@ -1,58 +1,87 @@
-# Adaptive Learning - Data and Signals Specification
-
-## Purpose
+Adaptive Learning - Data and Signals Specification
+Purpose
 Define the signal set and data rules for learner state classification. Signals are lightweight, ethical, and focused on performance, effort, and confidence.
 
-## Signal Categories
-- Performance: correct/incorrect, successful action, error type.
-- Effort and Stability: attempts per step, hint usage, time-on-step vs expected.
-- Interaction: skips, modality switches, save-for-later, exits.
-- Metacognitive: confidence rating (1-5), quick clarity tap.
+Signal Categories
+Performance: correct/incorrect, successful action, error type.
 
-## Signals to Avoid as Sole Inputs
-- Completion rate alone.
-- Time spent alone.
-- Scroll/view counts as engagement.
+Effort and Stability: attempts per step, hint usage, time-on-step vs expected.
 
-## Event Schema (Baseline)
-- event_id: string
-- user_id: string (hashed)
-- session_id: string
-- moment_id: string
-- step_id: string
-- event_type: enum
-- timestamp: ISO-8601
-- value: number or string
-- metadata: object
+Interaction: skips, modality switches, save-for-later, exits.
 
-## Required Events
-- step_attempted
-- step_correct
-- hint_used
-- confidence_rating
-- step_skipped
-- session_exit
-- idle_timeout
-- modality_switch
+Metacognitive: confidence rating (1-5), quick clarity tap.
 
-## Derived Metrics
-- attempts_per_step
-- hint_count_per_step
-- time_on_step
-- friction_score (weighted sum of retries, hints, over-time)
-- disengage_signal_count
+Signals to Avoid as Sole Inputs
+Completion rate alone.
 
-## Classification Support Fields
-- trend_window_size
-- confidence_alignment (performance vs self-reported)
-- uncertainty_score (based on signal strength + consistency)
+Time spent alone.
 
-## Data Quality Rules
-- All step events must include moment_id, step_id, and session_id.
-- Confidence events must be associated with a step_id.
-- Idle timeouts should record last action timestamp.
+Scroll/view counts as engagement.
 
-## Privacy and Ethics
-- No biometric or invasive signals.
-- Use only task-relevant interaction data.
-- Provide opt-out for confidence prompts.
+Event Schema (Baseline)
+event_id: string
+
+user_id: string (hashed)
+
+session_id: string
+
+moment_id: string
+
+step_id: string
+
+event_type: enum
+
+timestamp: ISO-8601
+
+value: number or string
+
+metadata: object
+
+Required Events
+step_attempted
+
+step_correct
+
+hint_used
+
+confidence_rating
+
+step_skipped
+
+session_exit
+
+idle_timeout
+
+modality_switch
+
+Derived Metrics
+attempts_per_step
+
+hint_count_per_step
+
+time_on_step
+
+friction_score (weighted sum of retries, hints, over-time)
+
+disengage_signal_count
+
+Classification Support Fields
+trend_window_size
+
+confidence_alignment (performance vs self-reported)
+
+uncertainty_score (based on signal strength + consistency)
+
+Data Quality Rules
+All step events must include moment_id, step_id, and session_id.
+
+Confidence events must be associated with a step_id.
+
+Idle timeouts should record last action timestamp.
+
+Privacy and Ethics
+No biometric or invasive signals.
+
+Use only task-relevant interaction data.
+
+Provide opt-out for confidence prompts.

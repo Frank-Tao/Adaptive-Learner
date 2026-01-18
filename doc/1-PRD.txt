@@ -1,44 +1,88 @@
-# Adaptive Learning - Product Requirements (PRD)
-
-## Purpose
+Adaptive Learning - Product Requirements (PRD)
+Purpose
 Define the internal product requirements for Adaptive Learning, a real-time learning experience that classifies learner state (success, struggle, disengagement) and adapts learning moments accordingly while preserving learner agency.
 
-## Goals
-- Identify learner state using bundled, trend-based signals with uncertainty.
-- Adapt the next learning moment to reinforce success, diagnose struggle, or reduce friction on disengagement.
-- Keep the learner in control with transparent, reversible decisions.
+Goals
+Act as a learning conductor, identify learner state based on proficiency, confidence, motivation/learning preference, and working style, using bundled, evidence and trend-based signals with consciousness of uncertainty.
 
-## Non-Goals
-- Building or delivering full courses.
-- Acting as a tutor or content generator.
-- Optimizing for surface engagement or completion alone.
+Adapt the next learning moment to reinforce success, diagnose struggle, or reduce friction on disengagement, leveraging incremental analysis to achieve learning effectiveness and efficiencies in line with the learning objectives. 
 
-## Target Users
-- B2C learners in short-burst or focused sessions.
-- Users with varied confidence, motivation, and context.
+Keep the learner in control of the learning  pace, format, and continuation with the provision of explainability, transparency in decision-making, alternatives, and reversible decisions.
 
-## Core Definitions
-- Success: performance, stability, and confidence are aligned.
-- Struggle: effort is present but progress is not.
-- Disengagement: withdrawal signals, not difficulty.
+Continuously reflect, evaluation and improve the services/recommendations, with evidence-based evaluation and customer feedback.
 
-## Primary Use Cases
-- User completes steps correctly and confidently; system reinforces and transfers.
-- User repeats errors or needs many hints; system diagnoses and adjusts.
-- User skips, exits, or idles; system reduces friction or offers exit.
+Non-Goals
+Building or delivering full courses.
 
-## Success Metrics
-- Increased repeat usage and session return rate.
-- Reduced friction score (hints + time + retries).
-- Improved recovery from struggle to success.
-- Lower false-disengagement interventions.
+Acting as a tutor or content generator.
 
-## Risks and Mitigations
-- Misclassification risk: use bundled signals and uncertainty scoring.
-- Over-intervention: low certainty should trigger probes, not strong changes.
-- Privacy: limit signals to lightweight and ethical inputs.
+Optimizing for surface engagement or completion alone.
 
-## Dependencies
-- Reliable instrumentation of signals.
-- Baseline content/moment formats (checklist, micro-lesson, prompt).
-- UX patterns for explanation and choice.
+Target Users
+B2C learners in short-burst or focused sessions.
+
+Users with varied confidence, motivation, and context.
+
+Adaptive Player is designed for busy, self-directed adults who are actively trying to learn and apply skills but are constrained by time, uncertainty, or lack of clarity. These learners don’t need more content or courses—they need guidance on what to do next, in a way that fits their working style and builds real capability. Adaptive Player supports learners who are already motivated but underserved by static learning platforms and generic AI explanations.
+
+Strategic sequencing (pragmatic roadmap)
+Phase 1 (Beachhead)
+
+Busy professionals
+
+One domain (e.g. applied AI, data, product)
+
+Clear “unblock me now” value
+
+Phase 2
+
+Career switchers / structured upskillers
+
+Add more scaffolding and reflection
+
+Phase 3
+
+Advanced / lifelong learners
+
+More challenge, exploration, personalization depth
+
+Same engine. Same Adaptive Player. Different framing.
+
+Core Definitions
+Success: performance, stability, and confidence are aligned.
+
+Struggle: effort is present but progress is not.
+
+Disengagement: withdrawal signals, not difficulty.
+
+Primary Use Cases
+User completes steps correctly and confidently; system reinforces and transfers.
+
+User repeats errors or needs many hints; system diagnoses and adjusts.
+
+User skips, exits, or idles; system reduces friction or offers exit.
+
+Success Metrics
+Increased repeat usage and session return rate.
+
+Reduced friction score (hints + time + retries).
+
+Improved recovery from struggle to success.
+
+Lower false-disengagement interventions.
+
+Risks and Mitigations
+Misclassification risk: use bundled signals and uncertainty scoring.
+
+Over-intervention: low certainty should trigger probes, not strong changes.
+
+Privacy: limit signals to lightweight and ethical inputs.
+
+Dependencies
+Reliable instrumentation of signals.
+
+Baseline content/moment formats (checklist, micro-lesson, prompt).
+
+UX patterns for explanation and choice.
+
+Learner profile module

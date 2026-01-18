@@ -1,0 +1,665 @@
+The Adaptive Player UI captures learner signals primarily through interaction rather than interrogation, emitting structured events that update the learner model and inform the next learning moment.
+
+ 
+
+1. Purpose of this document
+This document defines:
+
+UI states and components
+
+User interaction flows
+
+Event capture and data contracts
+
+Design constraints and non-goals
+
+It is intended to be implementation-ready for web development.
+
+2. Product boundary (important)
+Adaptive Player is a UI shell, not an agent.
+
+It renders learning moments, captures signals, and calls backend intelligence.
+
+All pedagogical decisions happen server-side.
+
+Frontend responsibility = sense → render → capture → respond.
+
+3. Design principles (non-negotiable)
+One cognitive job per screen
+
+One recommendation, one alternative
+
+No mandatory data entry
+
+Signals captured through interaction, not forms
+
+Explain decisions only when asked
+
+Never label learner states in the UI
+
+4. 1. Explicit UI Events
+UI Event
+
+Captured Signal
+
+Learner Model Update
+
+Goal selection
+
+Intent
+
+Goal context
+
+Time selection
+
+Constraint
+
+Session length preference
+
+Confidence (pre)
+
+Self-efficacy
+
+Confidence baseline
+
+Confidence (post)
+
+Calibration
+
+Confidence accuracy
+
+“Clear / Confusing”
+
+Metacognition
+
+Perceived clarity
+
+Format choice
+
+Preference signal
+
+Modality effectiveness
+
+4.2. Implicit Interaction Events (automatic)
+Event
+
+Signal
+
+Used to infer
+
+Time to first action
+
+Hesitation
+
+Readiness / confidence
+
+Time on step
+
+Cognitive load
+
+Difficulty fit
+
+Hint usage
+
+Support need
+
+Procedural gap
+
+Attempts
+
+Persistence
+
+Struggle vs failure
+
+Error pattern
+
+Misconception
+
+Gap type
+
+Skips
+
+Friction
+
+Disengagement
+
+Pauses / resumes
+
+Interruptibility
+
+Working style
+
+4.3. Derived State Classifications (never shown to user)
+Classification
+
+Derived from
+
+Success
+
+Correct + stable + aligned confidence
+
+Struggle
+
+Effort present + repeated friction
+
+Disengagement
+
+Withdrawal signals
+
+Working style
+
+Session length + interruptions
+
+Modality fit
+
+Outcome × format
+
+Mastery estimate
+
+Performance over time
+
+Each classification carries a certainty score.
+
+4.4. What the UI NEVER shows
+“You are struggling”
+
+Scores or grades
+
+Mastery percentages
+
+Internal labels
+
+The UI shows support, not diagnosis.
+
+5.  Core UI states (implementation-level)
+State 0 — Session Start
+Purpose: Capture minimum viable context.
+
+Components
+GoalSelector
+
+TimeSelector
+
+ConfidenceSlider (optional)
+
+PrimaryCTA
+
+Layout
+Single-column, above-the-fold.
+
+UI
+
+
+GoalSelector:
+- Text input with smart suggestions (async)
+TimeSelector:
+- ButtonGroup: [2 min] [5 min] [10+ min]
+ConfidenceSlider:
+- Optional, 1–5, skippable
+PrimaryCTA:
+- “Start”
+Emitted Events
+
+
+{
+  "event": "SESSION_START",
+  "goal": "string",
+  "time_available_minutes": 5,
+  "confidence_pre": 3 | null
+}
+State 1 — Learning Moment (Core)
+Purpose: Deliver one adaptive learning action.
+
+Components
+MomentHeader
+
+MomentContent
+
+HintButton
+
+WhyThisLink
+
+Layout
+Fixed-height card
+
+No scrolling preferred
+
+UI
+
+
+MomentHeader:
+- Goal summary
+- Time indicator (~5 min)
+MomentContent:
+- Instruction OR task OR checklist
+HintButton:
+- Explicit, never auto-triggered
+WhyThisLink:
+- Collapsible, secondary
+Emitted Events
+
+
+{
+  "event": "MOMENT_RENDERED",
+  "moment_id": "uuid",
+  "modality": "checklist | guided | retrieval"
+}
+State 2 — Feedback Loop
+Purpose: Close the loop + collect metacognitive signal.
+
+Components
+FeedbackMessage
+
+ClarityCheck
+
+NextActionButtons
+
+UI
+
+
+FeedbackMessage:
+- Supportive, non-evaluative
+ClarityCheck:
+- ButtonGroup: 👍 Clear | 😐 Okay | 👎 Confusing
+NextActionButtons:
+- [Continue]
+- [Try another format]
+Emitted Events
+
+
+{
+  "event": "FEEDBACK_RESPONSE",
+  "clarity": "clear | ok | confusing"
+}
+State 3A — Success Reinforcement
+Purpose: Transfer + confidence calibration.
+
+Components
+ReinforcementPrompt
+
+OptionalConfidenceCheck
+
+UI
+
+
+ReinforcementPrompt:
+- Single retrieval or application question
+OptionalConfidenceCheck:
+- “Could you do this again tomorrow?” (1–5)
+Emitted Events
+
+
+{
+  "event": "SUCCESS_REINFORCEMENT",
+  "confidence_post": 4
+}
+State 3B — Struggle Adjustment
+Purpose: Diagnose and adjust ONE variable.
+
+Components
+AdjustmentPrompt
+
+FormatChoiceButtons
+
+UI
+
+
+AdjustmentPrompt:
+- “What would help most right now?”
+FormatChoiceButtons:
+- Walkthrough
+- Checklist
+- One example
+Emitted Events
+
+
+{
+  "event": "STRUGGLE_ADJUSTMENT",
+  "chosen_support": "walkthrough"
+}
+State 3C — Disengagement De-risk
+Purpose: Reduce friction gracefully.
+
+Components
+DeRiskMessage
+
+ExitOptions
+
+UI
+
+
+ExitOptions:
+- 60-sec summary
+- Save for later
+- Come back tomorrow
+Emitted Events
+
+
+{
+  "event": "DISENGAGE_OPTION",
+  "choice": "save_for_later"
+}
+State 4 — Session Close
+Purpose: Frame progress as capability.
+
+Components
+CapabilitySummary
+
+NextStepPreview
+
+ExitCTA
+
+UI
+
+
+CapabilitySummary:
+- “You can now do X”
+NextStepPreview:
+- One suggested next move
+ExitCTA:
+- Continue | Remind me later
+Emitted Events
+
+
+{
+  "event": "SESSION_END",
+  "next_step_action": "continue | remind"
+}
+5. Implicit event capture (automatic)
+These events are captured without UI prompts.
+
+Event
+
+Trigger
+
+TIME_TO_FIRST_ACTION
+
+Moment rendered → first click
+
+TIME_ON_MOMENT
+
+Enter → exit moment
+
+HINT_USED
+
+Hint button clicked
+
+ATTEMPT_SUBMITTED
+
+Task interaction
+
+PAUSE
+
+App backgrounded
+
+RESUME
+
+App foregrounded
+
+SKIP
+
+Moment skipped
+
+EXIT
+
+Session terminated
+
+Example:
+
+
+
+{
+  "event": "HINT_USED",
+  "moment_id": "uuid",
+  "timestamp": "ISO-8601"
+}
+6. Derived learner states (backend-only)
+Frontend never computes or displays these.
+
+Success
+
+Struggle
+
+Disengagement
+
+Working style
+
+Mastery estimate
+
+Modality effectiveness
+
+Frontend only emits raw interaction signals.
+
+7. “Why this?” microcopy contract
+UI Rule
+Collapsed by default
+
+Max 2 sentences
+
+Benefit-framed
+
+Example Payload
+
+
+{
+  "why_this": "You’ve been learning in short bursts, and this step is about applying—not understanding—so a checklist should help you act quickly."
+}
+8. What NOT to build (explicit non-goals)
+❌ Onboarding questionnaires
+❌ Learning style settings
+❌ Profile dashboards
+❌ Scores or mastery meters
+❌ “You are struggling” messages
+
+These undermine trust and retention.
+
+9. Frontend–Backend contract (summary)
+Frontend sends
+
+UI events
+
+User choices
+
+Timing data
+
+Backend returns
+
+Next moment specification
+
+Feedback text
+
+Optional rationale
+
+Allowed alternatives
+
+10. Technical readiness checklist
+Before coding, confirm:
+
+Event schema agreed
+
+Moment spec JSON defined
+
+State machine implemented
+
+Time thresholds configurable
+
+Accessibility (keyboard, screen reader)
+
+Mobile-first breakpoints
+
+11. The Minimum Viable UI (what you actually need)
+A. Session Start UI (≤ 10 seconds)
+Purpose: Establish context, not profile.
+
+UI elements (on one screen)
+Goal prompt (single line)
+
+“What are you trying to do right now?”
+
+Free text OR 3–5 smart suggestions
+
+Time selector (critical)
+
+Buttons: 2 min · 5 min · 10+ min
+
+Confidence slider (optional, skippable)
+
+“How confident do you feel?” (1–5)
+
+Why this works
+Time available is the highest-value signal for adaptivity
+
+Confidence gives early calibration
+
+Goal anchors relevance
+
+⚠️ Do NOT ask for background, level, experience, or preferences here.
+
+B. Learning Moment UI (the core screen)
+This is where most data is captured passively.
+
+Structure
+One learning task per screen
+
+Clear action (“Try this”, “Choose”, “Apply”)
+
+No scrolling if possible
+
+What the UI captures automatically
+Time to first action
+
+Time on task
+
+Pauses / resumes
+
+Hint usage
+
+Errors and retries
+
+Skips
+
+This gives you:
+
+mastery signals
+
+working style signals
+
+friction indicators
+without asking anything explicitly
+
+C. Micro Check-ins (high leverage, low effort)
+Instead of surveys, use single-tap micro prompts after action.
+
+Examples:
+
+“That felt: 👍 Clear / 😐 Okay / 👎 Confusing”
+
+“Want another example, or move on?”
+
+“Too fast / Just right / Too slow”
+
+These:
+
+feel conversational
+
+take <1 second
+
+directly inform the next step
+
+📌 Rule: One micro check-in every 2–3 learning moments max.
+
+D. Confidence Calibration UI (only when it matters)
+Only surface confidence prompts:
+
+after success
+
+after repeated struggle
+
+Example:
+
+“How sure do you feel you could do this again tomorrow?”
+
+This is metacognitive gold, but only when well-timed.
+
+12. How the UI supports adaptivity without exposing complexity
+“Why this?” UI (trust builder)
+A small, expandable affordance:
+
+“Why am I seeing this?”
+
+When tapped:
+
+1–2 sentences max
+
+Always framed around benefit, not system logic
+
+Example:
+
+“You’ve been learning in short bursts, and this step is about applying—not understanding—so a checklist should help.”
+
+Never show:
+
+scores
+
+classifications
+
+internal labels (“struggle”, “disengaged”)
+
+Choice without overload
+Always show:
+
+one recommended path
+
+one alternative (link or button)
+
+Example:
+
+“Try this checklist”
+
+“Prefer a short explanation instead?”
+
+This preserves agency without decision fatigue.
+
+13. Progressive learner profile (invisible but powerful)
+From a UI perspective:
+
+There is no “profile setup”
+
+There is no dashboard of traits
+
+There is no settings page for learning style
+
+Instead:
+
+The learner experiences personalization
+
+The system earns confidence gradually
+
+You may later add:
+
+A “What I’ve learned about you” summary
+
+But only after repeated value delivery
+
+14. Suggested UI layout (conceptual)
+
+
+┌─────────────────────────────┐
+│ Adaptive Player             │
+│ Goal: Apply concept X       │
+│ Time: 5 min                 │
+├─────────────────────────────┤
+│ Learning Moment             │
+│ • One task                  │
+│ • One action                │
+│ • Optional hint             │
+├─────────────────────────────┤
+│ Feedback                    │
+│ “That worked / Almost…”     │
+│ 👍 😐 👎                    │
+├─────────────────────────────┤
+│ Next step                   │
+│ ▶ Continue                  │
+│ ↔ Try another format        │
+│ ⏸ Save for later            │
+└─────────────────────────────┘

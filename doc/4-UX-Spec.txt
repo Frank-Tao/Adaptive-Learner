@@ -1,39 +1,56 @@
-# Adaptive Learning - UX Specification
+Adaptive Learning - UX Specification
+UX Principles
+Learner agency: all adaptive moves are explainable and reversible.
 
-## UX Principles
-- Learner agency: all adaptive moves are explainable and reversible.
-- Respect attention: short, minimal interventions.
-- No guilt, no nagging.
+Respect attention: short, minimal interventions.
 
-## Core UI Patterns
-- Moment Card: single learning moment with clear next action.
-- Prompt Bar: short confirmatory prompt or explanation of adaptation.
-- Choice Chips: quick alternatives (switch format, save for later, exit).
+No guilt, no nagging.
 
-## Success State Experience
-- Acknowledge briefly.
-- Offer one transfer or retrieval prompt.
-- Provide the next step or exit.
+Core UI Patterns
+Moment Card: single learning moment with clear next action.
 
-## Struggle State Experience
-- Pause progression and diagnose.
-- Offer one adjustment at a time (simplify, switch format, example).
-- Maintain a supportive tone.
+Prompt Bar: short confirmatory prompt or explanation of adaptation.
 
-## Disengagement State Experience
-- Shorten the next moment.
-- Offer a 60-second summary or save-for-later.
-- Provide a graceful exit with no penalty.
+Choice Chips: quick alternatives (switch format, save for later, exit).
 
-## Transparency and Control
-- Explain why an adaptation happened in 1-2 lines.
-- Always provide an alternative path or skip option.
+Feedback window (like MS Clippy?)
 
-## Edge Cases
-- Low certainty classification: ask a brief probe question, do not alter flow dramatically.
-- Conflicting signals: default to minimal intervention.
+Success State Experience
+Acknowledge briefly.
 
-## Accessibility
-- Keyboard navigable controls.
-- Clear, plain language.
-- Avoid color-only indicators.
+Offer one transfer or retrieval prompt.
+
+Provide feedback, recommend next step, or exit to apply. 
+
+Struggle State Experience
+Pause progression and diagnose.
+
+Offer one adjustment at a time (simplify, switch format, example).
+
+Maintain a constructive and encouraging tone, offer timely feedback and more scaffolding support
+
+Disengagement State Experience
+Shorten the next moment.
+
+Offer a 60-second summary or save-for-later.
+
+Ask for feedback, insights for content/experience improvement.
+
+Provide a graceful exit with no penalty.
+
+Transparency and Control
+Explain why an adaptation happened in 1-2 lines.
+
+Always provide an alternative path or skip option.
+
+Edge Cases
+Low certainty classification: ask a brief probe question, do not alter flow dramatically.
+
+Conflicting signals: default to minimal intervention.
+
+Accessibility
+Keyboard navigable controls.
+
+Clear, plain language.
+
+Avoid color-only indicators.
