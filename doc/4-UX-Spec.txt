@@ -1,0 +1,39 @@
+# Adaptive Learning - UX Specification
+
+## UX Principles
+- Learner agency: all adaptive moves are explainable and reversible.
+- Respect attention: short, minimal interventions.
+- No guilt, no nagging.
+
+## Core UI Patterns
+- Moment Card: single learning moment with clear next action.
+- Prompt Bar: short confirmatory prompt or explanation of adaptation.
+- Choice Chips: quick alternatives (switch format, save for later, exit).
+
+## Success State Experience
+- Acknowledge briefly.
+- Offer one transfer or retrieval prompt.
+- Provide the next step or exit.
+
+## Struggle State Experience
+- Pause progression and diagnose.
+- Offer one adjustment at a time (simplify, switch format, example).
+- Maintain a supportive tone.
+
+## Disengagement State Experience
+- Shorten the next moment.
+- Offer a 60-second summary or save-for-later.
+- Provide a graceful exit with no penalty.
+
+## Transparency and Control
+- Explain why an adaptation happened in 1-2 lines.
+- Always provide an alternative path or skip option.
+
+## Edge Cases
+- Low certainty classification: ask a brief probe question, do not alter flow dramatically.
+- Conflicting signals: default to minimal intervention.
+
+## Accessibility
+- Keyboard navigable controls.
+- Clear, plain language.
+- Avoid color-only indicators.

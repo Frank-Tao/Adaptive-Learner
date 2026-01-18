@@ -1,0 +1,44 @@
+# Adaptive Learning - Product Requirements (PRD)
+
+## Purpose
+Define the internal product requirements for Adaptive Learning, a real-time learning experience that classifies learner state (success, struggle, disengagement) and adapts learning moments accordingly while preserving learner agency.
+
+## Goals
+- Identify learner state using bundled, trend-based signals with uncertainty.
+- Adapt the next learning moment to reinforce success, diagnose struggle, or reduce friction on disengagement.
+- Keep the learner in control with transparent, reversible decisions.
+
+## Non-Goals
+- Building or delivering full courses.
+- Acting as a tutor or content generator.
+- Optimizing for surface engagement or completion alone.
+
+## Target Users
+- B2C learners in short-burst or focused sessions.
+- Users with varied confidence, motivation, and context.
+
+## Core Definitions
+- Success: performance, stability, and confidence are aligned.
+- Struggle: effort is present but progress is not.
+- Disengagement: withdrawal signals, not difficulty.
+
+## Primary Use Cases
+- User completes steps correctly and confidently; system reinforces and transfers.
+- User repeats errors or needs many hints; system diagnoses and adjusts.
+- User skips, exits, or idles; system reduces friction or offers exit.
+
+## Success Metrics
+- Increased repeat usage and session return rate.
+- Reduced friction score (hints + time + retries).
+- Improved recovery from struggle to success.
+- Lower false-disengagement interventions.
+
+## Risks and Mitigations
+- Misclassification risk: use bundled signals and uncertainty scoring.
+- Over-intervention: low certainty should trigger probes, not strong changes.
+- Privacy: limit signals to lightweight and ethical inputs.
+
+## Dependencies
+- Reliable instrumentation of signals.
+- Baseline content/moment formats (checklist, micro-lesson, prompt).
+- UX patterns for explanation and choice.

@@ -1,0 +1,50 @@
+# Adaptive Learning - Technical Specification
+
+## Overview
+Adaptive Learning is a real-time learning orchestrator that classifies learner state from signal bundles and selects the next best learning moment. The system emphasizes trend-based classification and uncertainty scoring.
+
+## System Components
+- Event Collector: captures performance, temporal, interaction, and metacognitive signals.
+- State Classifier: computes state + certainty using bundled signals across 2-3 steps.
+- Moment Selector: chooses the next learning moment based on state and context.
+- Response Renderer: presents the moment with explanation and options.
+- Analytics Pipeline: aggregates session and moment metrics.
+
+## Data Flow
+1. User action emits signal event.
+2. Signals are normalized and aggregated in a sliding window.
+3. Classifier outputs {state, certainty, reasons}.
+4. Moment selector decides the next action and response template.
+5. Renderer outputs the moment and records follow-up signals.
+
+## Classification Logic (Baseline)
+- Never classify from a single signal.
+- Track trends across 2-3 steps (configurable).
+- Provide certainty: low/medium/high.
+- Success (example): correct or successful action, attempts <= 2, hint_count <= 1, confidence >= 3, time-on-step in range.
+- Struggle (example): 2+ of incorrect, attempts >= 2, hint_count >= 2, time-on-step above expected, confidence <= 2, repeating error pattern.
+- Disengagement (example): skip without attempt OR exit mid-step OR idle > T_idle OR repeated deferrals.
+
+## Adaptive Response Rules
+- Success: acknowledge briefly, provide one transfer prompt, offer next step.
+- Struggle: pause progression, diagnose cause, adjust one variable (simplify, switch format, add example).
+- Disengagement: shorten next moment, lower load, offer graceful exit, never guilt.
+
+## Session State Machine (Macro)
+- Enter SESSION_DE_RISK if 2 consecutive disengage signals OR friction_score exceeds threshold.
+- SESSION_CLOSE outputs capability statement, next suggested moment, optional reminder.
+
+## Interfaces (Internal)
+- /events ingest: event payloads for signals.
+- /classify: returns state + certainty + reasons.
+- /next-moment: returns moment type + response template.
+
+## Configurables
+- Thresholds for time, attempts, hints, confidence.
+- Window size for trend classification.
+- Moment catalog and response templates.
+
+## Observability
+- State distribution over time.
+- Misclassification proxies (rapid flips, user overrides).
+- Recovery rate from struggle to success.
