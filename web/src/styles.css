@@ -101,6 +101,47 @@ button:hover {
   gap: 18px;
 }
 
+.status-note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.session-start,
+.session-close {
+  padding: 28px;
+  border-radius: 22px;
+  background: rgba(19, 38, 61, 0.35);
+  border: 1px solid var(--stroke);
+  display: grid;
+  gap: 16px;
+}
+
+.session-start h2,
+.session-close h2 {
+  margin: 0;
+}
+
+.text-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--stroke);
+  background: rgba(245, 240, 232, 0.08);
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.time-row,
+.confidence-row {
+  display: grid;
+  gap: 10px;
+}
+
+.confidence-row input[type='range'] {
+  width: 100%;
+}
+
 .prompt-bar {
   display: flex;
   justify-content: space-between;
@@ -172,6 +213,17 @@ button:hover {
   color: var(--text);
   padding: 10px 18px;
   font-size: 0.9rem;
+}
+
+.chip.active {
+  background: rgba(246, 183, 60, 0.2);
+  border-color: rgba(246, 183, 60, 0.5);
+}
+
+.moment-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .feedback-window {
