@@ -1,0 +1,83 @@
+# Adaptive Learning - Backend Agent Orchestration
+
+## Agent List and Responsibilities
+### 1. Session Orchestrator
+- Purpose: Owns session lifecycle and routes requests to other agents.
+- LLM model: None (rules).
+- Input: {session_id, user_id, request_type}.
+- Output: {next_action, routed_request}.
+
+### 2. Event Collector
+- Purpose: Validate and ingest raw learner events.
+- LLM model: None (rules).
+- Input: {event_id, session_id, step_id, event_type, timestamp, value, metadata}.
+- Output: {ok, event_id}.
+
+### 3. Signal Normalizer
+- Purpose: Normalize signals into a consistent schema and units.
+- LLM model: None (rules).
+- Input: Raw events and metadata.
+- Output: Normalized signal record.
+
+### 4. Trend Aggregator
+- Purpose: Aggregate signals over a sliding window (2-3 steps).
+- LLM model: None (rules).
+- Input: Normalized signals by step.
+- Output: Aggregated summary (attempts, hints, time, confidence, disengage signals).
+
+### 5. State Classifier
+- Purpose: Classify learner state and certainty.
+- LLM model: None (rules, thresholds).
+- Input: Aggregated summary.
+- Output: {state, certainty, reasons}.
+
+### 6. Uncertainty Evaluator
+- Purpose: Decide if intervention should be light (probe) or strong.
+- LLM model: None (rules).
+- Input: {state, certainty, reasons}.
+- Output: {intervention_level, rationale}.
+
+### 7. Moment Selector
+- Purpose: Choose the next learning moment type based on state and context.
+- LLM model: None (rules) or gpt-4o-mini for richer selection.
+- Input: {state, learner_profile, session_context}.
+- Output: {moment_type, alternatives}.
+
+### 8. Response Composer
+- Purpose: Compose the final moment text, prompt, and explanation.
+- LLM model: gpt-4o-mini (safe, low-latency copy).
+- Input: {moment_type, explanation, tone_guidelines, learner_context}.
+- Output: {title, prompt, choice_labels, explanation}.
+
+### 9. Tone and Safety Guardrail
+- Purpose: Enforce tone rules (no guilt, minimal intervention).
+- LLM model: None (rules) or gpt-4o-mini for rephrase.
+- Input: Draft response.
+- Output: Safe response text.
+
+### 10. Learner Profile Manager
+- Purpose: Track preferences, confidence alignment, and working style.
+- LLM model: None (rules).
+- Input: {user_id, profile_updates}.
+- Output: Updated learner profile.
+
+### 11. Evaluation and Metrics Agent
+- Purpose: Track state distribution, flips, recovery, disengagement conversions.
+- LLM model: None (rules).
+- Input: {state, session_id}.
+- Output: Aggregated metrics snapshot.
+
+## Suggested Model Choices (ChatGPT Provider)
+- gpt-4o-mini: response composition, optional moment selection.
+- No LLM: classification, aggregation, metrics, profile updates, orchestration.
+
+## Example Orchestration Flow
+1. Event Collector ingests events.
+2. Signal Normalizer + Trend Aggregator summarize signals.
+3. State Classifier determines {state, certainty, reasons}.
+4. Uncertainty Evaluator sets intervention level.
+5. Moment Selector chooses moment type and alternatives.
+6. Response Composer generates copy and explanation.
+7. Tone Guardrail checks phrasing.
+8. Session Orchestrator returns payload to UI.
+9. Evaluation Agent updates metrics.

@@ -54,3 +54,11 @@ Keyboard navigable controls.
 Clear, plain language.
 
 Avoid color-only indicators.
+
+Workflow Notes (Typical UI)
+Moment Card: single action, no scrolling when possible.
+Prompt Bar: brief explanation, collapsed by default.
+Choice Chips: one recommendation, one alternative, plus save/exit.
+Feedback Window: lightweight, optional micro-feedback after moments.
+Micro check-ins: simple taps (clear/ok/confusing) every 2-3 moments.
+Why this?: 1-2 sentences, benefit-framed, no internal labels.

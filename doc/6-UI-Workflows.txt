@@ -1,0 +1,49 @@
+# Adaptive Learning - UI Workflows
+
+## Workflow 1: Session Start and Intent Capture
+1. Landing / entry screen: user chooses goal or topic.
+2. Quick intent capture: pick a mode (short burst vs deep focus) and confidence check (1-5).
+3. Start session: system creates session_id and loads the first Moment Card.
+4. Prompt Bar explains what will happen next in 1-2 lines.
+
+## Workflow 2: Learning Moment Micro-Loop (Default)
+1. Moment Card shows a single step with a clear action.
+2. User attempts the step and optionally rates confidence.
+3. System records signals (attempts, hints, time-on-step, confidence).
+4. State Classifier outputs {state, certainty, reasons}.
+5. Prompt Bar shows a brief explanation and choice chips.
+6. User selects next action (continue, switch format, save, exit).
+
+## Workflow 3: Success Response
+1. Acknowledge success briefly.
+2. Offer one transfer prompt (apply in a new context).
+3. Provide next step or exit option.
+4. Log transfer success signal if attempted.
+
+## Workflow 4: Struggle Response
+1. Pause progression and signal a short diagnostic.
+2. Offer one adjustment at a time (simplify, example, switch format).
+3. Provide supportive feedback without over-teaching.
+4. Continue with adjusted moment and re-evaluate.
+
+## Workflow 5: Disengagement Response
+1. Detect disengagement signals (skip, exit, idle, repeated deferral).
+2. Show a low-friction moment (60-second recap or save for later).
+3. Offer a graceful exit with no penalty.
+4. Ask for optional feedback on context.
+
+## Workflow 6: Feedback Window
+1. After a moment, show a lightweight feedback window.
+2. User can give a quick note or tap (helpful / not helpful).
+3. Feedback is stored for evaluation and personalization.
+
+## Workflow 7: Session Close (Macro-loop)
+1. Trigger SESSION_CLOSE after repeated disengagement or session end.
+2. Display capability statement (what learner can now do).
+3. Offer next suggested moment and optional reminder.
+
+## UI Building Blocks (Reference)
+- Moment Card: single step with clear next action.
+- Prompt Bar: short explanation of adaptation.
+- Choice Chips: alternatives (switch format, save, exit).
+- Feedback Window: quick feedback input.

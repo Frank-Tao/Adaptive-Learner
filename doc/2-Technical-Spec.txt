@@ -79,3 +79,70 @@ Misclassification proxies (rapid flips, user overrides).
 Recovery rate from struggle to success.
 
 Diagnose disengagement, conversion rate from disengagement to success, correlation between disengagement and struggle?
+
+Agent Orchestration (Backend)
+1. Session Orchestrator
+Purpose: session lifecycle and routing.
+Model: none (rules).
+Input: {session_id, user_id, request_type}
+Output: {next_action, routed_request}
+
+2. Event Collector
+Purpose: validate and ingest raw learner events.
+Model: none (rules).
+Input: {event_id, session_id, step_id, event_type, timestamp, value, metadata}
+Output: {ok, event_id}
+
+3. Signal Normalizer
+Purpose: normalize signals into a consistent schema and units.
+Model: none (rules).
+Input: raw events
+Output: normalized signal record
+
+4. Trend Aggregator
+Purpose: aggregate signals over a sliding window (2-3 steps).
+Model: none (rules).
+Input: normalized signals by step
+Output: aggregated summary (attempts, hints, time, confidence, disengage signals)
+
+5. State Classifier
+Purpose: classify learner state and certainty.
+Model: none (rules, thresholds).
+Input: aggregated summary
+Output: {state, certainty, reasons}
+
+6. Uncertainty Evaluator
+Purpose: set intervention level when certainty is low.
+Model: none (rules).
+Input: {state, certainty, reasons}
+Output: {intervention_level, rationale}
+
+7. Moment Selector
+Purpose: choose the next moment type and alternatives.
+Model: rules or gpt-4o-mini for richer selection.
+Input: {state, learner_profile, session_context}
+Output: {moment_type, alternatives}
+
+8. Response Composer
+Purpose: compose moment copy, prompt, and explanation.
+Model: gpt-4o-mini.
+Input: {moment_type, explanation, tone_guidelines, learner_context}
+Output: {title, prompt, choice_labels, explanation}
+
+9. Tone and Safety Guardrail
+Purpose: enforce tone rules (no guilt, minimal intervention).
+Model: rules or gpt-4o-mini for rephrase.
+Input: draft response
+Output: safe response text
+
+10. Learner Profile Manager
+Purpose: track preferences, confidence alignment, working style.
+Model: none (rules).
+Input: {user_id, profile_updates}
+Output: updated learner profile
+
+11. Evaluation and Metrics Agent
+Purpose: track state distribution, flips, recovery, disengagement conversions.
+Model: none (rules).
+Input: {state, session_id}
+Output: metrics snapshot

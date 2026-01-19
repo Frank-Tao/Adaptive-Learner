@@ -37,7 +37,16 @@ Explain decisions only when asked
 
 Never label learner states in the UI
 
-4. 1. Explicit UI Events
+4. Workflow overview (typical)
+Session start: capture goal, time available, optional confidence.
+Learning moment micro-loop: render one action, capture signals, explain briefly, offer choices.
+Success response: reinforce and transfer, offer next step or exit.
+Struggle response: diagnose and adjust one variable at a time.
+Disengagement response: reduce friction, recap or save-for-later, graceful exit.
+Feedback window: quick micro-feedback to improve future moments.
+Session close: capability statement and next suggested moment.
+
+4.1. Explicit UI Events
 UI Event
 
 Captured Signal
@@ -171,7 +180,7 @@ Internal labels
 
 The UI shows support, not diagnosis.
 
-5.  Core UI states (implementation-level)
+5. Core UI states (implementation-level)
 State 0 — Session Start
 Purpose: Capture minimum viable context.
 
@@ -471,6 +480,10 @@ Feedback text
 Optional rationale
 
 Allowed alternatives
+
+Backend also returns
+- moment_type (e.g., transfer_prompt, diagnostic_adjust, low_friction)
+- explanation (short, benefit-framed)
 
 10. Technical readiness checklist
 Before coding, confirm:

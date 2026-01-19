@@ -1,5 +1,6 @@
 import { getSession, recordClassification } from '../lib/store.js';
 import { classifySession } from '../lib/classifier.js';
+import { evaluateIntervention } from '../lib/uncertainty.js';
 
 export async function handler(event) {
   try {
@@ -11,8 +12,12 @@ export async function handler(event) {
     const session = getSession(payload.session_id);
     const classification = classifySession(session);
     recordClassification(payload.session_id, classification.state);
+    const intervention = evaluateIntervention(classification);
 
-    return jsonResponse(200, classification);
+    return jsonResponse(200, {
+      ...classification,
+      intervention
+    });
   } catch (error) {
     return jsonResponse(500, { error: error.message || 'Server error' });
   }

@@ -1,6 +1,9 @@
-import { getSession, recordClassification } from '../lib/store.js';
+import { getSession, recordClassification, getProfile } from '../lib/store.js';
 import { classifySession } from '../lib/classifier.js';
 import { selectMoment, buildExplanation } from '../lib/momentSelector.js';
+import { evaluateIntervention } from '../lib/uncertainty.js';
+import { composeResponse } from '../lib/responseComposer.js';
+import { enforceTone } from '../lib/toneGuardrail.js';
 
 export async function handler(event) {
   try {
@@ -12,15 +15,26 @@ export async function handler(event) {
     const session = getSession(payload.session_id);
     const classification = classifySession(session);
     recordClassification(payload.session_id, classification.state);
+    const intervention = evaluateIntervention(classification);
+    const profile = payload.user_id ? getProfile(payload.user_id) : null;
 
     const moment = selectMoment({
       state: classification.state,
-      summary: classification.summary
+      summary: classification.summary,
+      learner_profile: profile
+    });
+
+    const explanation = buildExplanation(classification);
+    const response = composeResponse({
+      moment,
+      explanation: enforceTone(explanation)
     });
 
     return jsonResponse(200, {
       ...moment,
-      explanation: buildExplanation(classification)
+      explanation: response.explanation,
+      response,
+      intervention
     });
   } catch (error) {
     return jsonResponse(500, { error: error.message || 'Server error' });

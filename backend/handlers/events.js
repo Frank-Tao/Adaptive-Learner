@@ -1,4 +1,5 @@
 import { recordEvent, getSession } from '../lib/store.js';
+import { normalizeEvent } from '../lib/normalizer.js';
 
 export async function handler(event) {
   try {
@@ -10,8 +11,9 @@ export async function handler(event) {
       return jsonResponse(400, { error: `Missing fields: ${missing.join(', ')}` });
     }
 
-    recordEvent(payload);
-    const session = getSession(payload.session_id);
+    const normalized = normalizeEvent(payload);
+    recordEvent(normalized);
+    const session = getSession(normalized.session_id);
 
     return jsonResponse(200, {
       ok: true,

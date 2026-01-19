@@ -1,5 +1,6 @@
 const store = {
   sessions: new Map(),
+  profiles: new Map(),
   metrics: {
     stateCounts: { success: 0, struggle: 0, disengagement: 0 },
     flips: 0,
@@ -18,6 +19,25 @@ function getSession(sessionId) {
     });
   }
   return store.sessions.get(sessionId);
+}
+
+function getProfile(userId) {
+  if (!store.profiles.has(userId)) {
+    store.profiles.set(userId, {
+      user_id: userId,
+      working_style: null,
+      confidence_alignment: null,
+      modality_preferences: []
+    });
+  }
+  return store.profiles.get(userId);
+}
+
+function updateProfile(userId, updates) {
+  const profile = getProfile(userId);
+  Object.assign(profile, updates);
+  store.profiles.set(userId, profile);
+  return profile;
 }
 
 function recordEvent(event) {
@@ -93,4 +113,4 @@ function getMetrics() {
   return { ...store.metrics };
 }
 
-export { getSession, recordEvent, recordClassification, getMetrics };
+export { getSession, getProfile, updateProfile, recordEvent, recordClassification, getMetrics };

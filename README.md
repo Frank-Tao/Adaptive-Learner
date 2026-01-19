@@ -22,3 +22,4 @@ Backend (Lambda handler):
 - `backend/handlers/classify.js`: classify learner state
 - `backend/handlers/next-moment.js`: select the next learning moment
 - `backend/handlers/metrics.js`: basic evaluation metrics
+- `backend/handlers/profile.js`: read/update learner profile

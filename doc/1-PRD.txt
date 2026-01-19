@@ -11,6 +11,15 @@ Keep the learner in control of the learning  pace, format, and continuation with
 
 Continuously reflect, evaluation and improve the services/recommendations, with evidence-based evaluation and customer feedback.
 
+Typical Workflow (B2C)
+Session start: capture goal, time available, and optional confidence.
+Learning moment micro-loop: present one action, capture interaction signals, classify state, explain briefly, offer choices.
+Success response: reinforce and transfer, offer next step or exit.
+Struggle response: diagnose and adjust one variable at a time.
+Disengagement response: reduce friction, offer recap or save-for-later, graceful exit.
+Feedback window: quick micro-feedback to improve future moments.
+Session close: capability statement and next suggested moment.
+
 Non-Goals
 Building or delivering full courses.
 
@@ -86,3 +95,6 @@ Baseline content/moment formats (checklist, micro-lesson, prompt).
 UX patterns for explanation and choice.
 
 Learner profile module
+
+Backend approach
+Multi-agent orchestration for event collection, signal aggregation, state classification, moment selection, response composition, and evaluation.

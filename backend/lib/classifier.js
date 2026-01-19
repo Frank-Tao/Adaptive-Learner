@@ -1,12 +1,9 @@
+import { aggregateSteps } from './aggregator.js';
 import { config } from './config.js';
 
 function classifySession(session) {
-  const windowSize = config.trendWindowSize;
-  const steps = Array.from(session.steps.values())
-    .sort((a, b) => b.updated_at - a.updated_at)
-    .slice(0, windowSize);
-
-  const signalSummary = summarizeSignals(steps);
+  const steps = Array.from(session.steps.values());
+  const signalSummary = aggregateSteps(steps);
   const { state, certainty, reasons } = computeState(signalSummary);
 
   return {
@@ -15,33 +12,6 @@ function classifySession(session) {
     reasons,
     summary: signalSummary
   };
-}
-
-function summarizeSignals(steps) {
-  const summary = {
-    stepsObserved: steps.length,
-    attempts: 0,
-    hints: 0,
-    correctCount: 0,
-    confidenceValues: [],
-    timeValues: [],
-    disengageSignals: 0
-  };
-
-  for (const step of steps) {
-    summary.attempts += step.attempts;
-    summary.hints += step.hints;
-    summary.correctCount += step.correct ? 1 : 0;
-    if (typeof step.confidence === 'number') {
-      summary.confidenceValues.push(step.confidence);
-    }
-    if (typeof step.time_on_step === 'number') {
-      summary.timeValues.push(step.time_on_step);
-    }
-    summary.disengageSignals += step.disengageSignals;
-  }
-
-  return summary;
 }
 
 function computeState(summary) {

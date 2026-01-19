@@ -85,3 +85,13 @@ No biometric or invasive signals.
 Use only task-relevant interaction data.
 
 Provide opt-out for confidence prompts.
+
+UI Workflow Alignment
+Explicit UI events: goal selection, time selection, confidence (pre/post), clarity tap, format choice.
+Implicit interaction events: time to first action, time on step, hint used, attempts, errors, skips, pause/resume, exit.
+
+Derived Fields for Orchestration
+trend_window_size
+uncertainty_score
+intervention_level
+working_style (short burst vs deep focus)
