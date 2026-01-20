@@ -16,7 +16,7 @@ function mockFetchSequence(responses) {
 test('renders adaptive learning hero headline', () => {
   render(<App />);
   expect(
-    screen.getByRole('heading', { name: /designing the next moment of learning/i })
+    screen.getByRole('heading', { name: /make curiosity a daily habit/i })
   ).toBeInTheDocument();
 });
 
