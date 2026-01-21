@@ -9,8 +9,7 @@ const mockMoment = {
   certainty: 'medium',
   explanation: 'State: success (medium) based on performance_stable.',
   choices: ['Apply to my work', 'Try another example', 'Save for later'],
-  feedbackPrompt:
-    'Was this moment helpful? Share a quick note to keep improving the flow.'
+  feedbackPrompt: 'Tap a quick signal to shape the next step.'
 };
 
 export function useSessionFlow() {

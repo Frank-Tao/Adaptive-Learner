@@ -21,42 +21,41 @@ export default function ConsumerApp() {
         <div className="hero-grid">
           <div className="hero-copy fade-up">
             <p className="eyebrow">For learners</p>
-            <h1>Make curiosity a daily habit.</h1>
+            <h1>Practice the skill you need right now.</h1>
             <p className="subhead">
-              Short, adaptive learning moments that meet you where you are and
-              keep the next step obvious.
+              Five-minute, adaptive learning moments for real life. No courses,
+              no streak pressure, just the next useful step.
             </p>
             <div className="cta-row">
               <button className="primary" onClick={() => setStage('start')}>
-                Start a session
+                Start a 5-minute session
               </button>
-              <button className="ghost">See how it works</button>
+              <button className="ghost">See the flow</button>
             </div>
             <div className="hero-highlights stagger">
               <div className="highlight-card">
-                <h3>2 minute momentum</h3>
-                <p>Quick prompts that fit between tasks or during commutes.</p>
+                <h3>5-minute focus</h3>
+                <p>Short bursts that fit after dinner or between meetings.</p>
               </div>
               <div className="highlight-card">
-                <h3>Clarity over streaks</h3>
-                <p>Focus on transfer and confidence, not dopamine loops.</p>
+                <h3>Respectful recovery</h3>
+                <p>Struggling or distracted? Get a simpler step or a recap.</p>
               </div>
               <div className="highlight-card">
-                <h3>Explain it back</h3>
-                <p>Every moment ends with a reflection to lock it in.</p>
+                <h3>No profiles to fill out</h3>
+                <p>Personalization comes from how you learn, not surveys.</p>
               </div>
             </div>
           </div>
           <div className="hero-panel fade-up">
             <div className="panel-note">
-              <span>Live preview</span>
-              <p>Try a sample moment in the practice deck.</p>
+              <span>Tonight</span>
+              <p>Preview a real-world practice moment.</p>
             </div>
             <div className="panel-card">
-              <h2>Prompt of the day</h2>
+              <h2>Price objection drill</h2>
               <p>
-                Describe the idea you just learned as if you are teaching a
-                friend.
+                Try a 3-step response the next time a client pushes back on price.
               </p>
               <button className="ghost small">Try another</button>
             </div>
@@ -70,10 +69,10 @@ export default function ConsumerApp() {
           <div className="session-start card">
             <div>
               <h2>Session start</h2>
-              <p>What are you trying to learn or finish?</p>
+              <p>What are you trying to do right now?</p>
               <input
                 className="text-input"
-                placeholder="Write a short goal"
+                placeholder="e.g. Handle price objections"
                 value={goal}
                 onChange={(event) => setGoal(event.target.value)}
               />
@@ -149,7 +148,7 @@ export default function ConsumerApp() {
         {stage === 'feedback' && (
           <div className="feedback-window">
             <div>
-              <h3>Feedback window</h3>
+              <h3>How did that feel?</h3>
               <p>{moment.feedbackPrompt}</p>
               <div className="choice-chips">
                 {['Clear', 'Okay', 'Confusing'].map((choice) => (
@@ -168,12 +167,30 @@ export default function ConsumerApp() {
         {stage === 'close' && (
           <div className="session-close card">
             <h2>Session close</h2>
-            <p>Take one line to explain what changed in your understanding.</p>
+            <p>You can now respond to price objections with a clear 3-step structure.</p>
             <div className="choice-chips">
               <button className="chip" onClick={() => setStage('moment')}>
                 Next moment
               </button>
               <button className="chip">Remind me later</button>
+            </div>
+            <div className="activity-feedback">
+              <h3>Help improve this practice?</h3>
+              <div className="choice-chips">
+                {['Worked well', 'Could be better', "Didn't help"].map((choice) => (
+                  <button className="chip" key={choice}>
+                    {choice}
+                  </button>
+                ))}
+              </div>
+              <p className="helper-text">If needed, pick one reason.</p>
+              <div className="choice-chips">
+                {['Too basic', 'Too long', 'Not realistic enough'].map((choice) => (
+                  <button className="chip" key={choice}>
+                    {choice}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -181,16 +198,16 @@ export default function ConsumerApp() {
 
       <section className="grid">
         <div className="card">
-          <h2>Momentum map</h2>
-          <p>Visualize how your confidence rises after each moment.</p>
+          <h2>Real-life readiness</h2>
+          <p>Build capability with moments you can use the same day.</p>
         </div>
         <div className="card">
-          <h2>Personal signal stack</h2>
-          <p>Blend time, focus, and recall into a quick adaptive profile.</p>
+          <h2>Adaptive without pressure</h2>
+          <p>Clear, okay, or confusing stays in the flow without a quiz.</p>
         </div>
         <div className="card">
-          <h2>Reversible choices</h2>
-          <p>Keep learning playful with prompts you can pause or swap.</p>
+          <h2>Save and return</h2>
+          <p>Exit gracefully with a short recap when life gets busy.</p>
         </div>
       </section>
     </div>

@@ -308,6 +308,25 @@ button:hover {
   font-size: 1rem;
 }
 
+.activity-feedback {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--stroke);
+  display: grid;
+  gap: 10px;
+}
+
+.activity-feedback h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.helper-text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

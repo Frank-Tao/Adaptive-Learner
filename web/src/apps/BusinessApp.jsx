@@ -21,39 +21,39 @@ export default function BusinessApp() {
         <div className="hero-top fade-up">
           <div>
             <p className="eyebrow">Business suite</p>
-            <h1>Adaptive learning, built for teams.</h1>
+            <h1>Adaptive learning, built for enterprise workflows.</h1>
             <p className="subhead">
-              Orchestrate skill growth across roles with shared signals,
-              transparent logic, and measurable learning outcomes.
+              Unify internal and external knowledge into one guided moment with
+              LMS, Jira, and Confluence signals in the loop.
             </p>
           </div>
           <div className="hero-actions">
             <button className="primary">Book a demo</button>
-            <button className="ghost">View security</button>
+            <button className="ghost">Security & compliance</button>
           </div>
         </div>
         <div className="hero-grid">
           <div className="hero-metrics stagger">
             <div className="metric-card">
-              <span>Avg. time to insight</span>
-              <strong>8.4 min</strong>
-              <p>Auto-generated learning moments for busy teams.</p>
+              <span>Avg. time to action</span>
+              <strong>9 min</strong>
+              <p>Role-aware moments built from your existing content.</p>
             </div>
             <div className="metric-card">
-              <span>Engagement lift</span>
-              <strong>2.1x</strong>
-              <p>Adaptive pacing keeps programs lightweight.</p>
+              <span>Adoption lift</span>
+              <strong>2.3x</strong>
+              <p>Respectful disengagement keeps trust high.</p>
             </div>
             <div className="metric-card">
               <span>Deployment</span>
               <strong>48 hrs</strong>
-              <p>Connect LMS, HRIS, or custom event streams.</p>
+              <p>Connect LMS, SSO, SCIM, and internal wikis.</p>
             </div>
           </div>
           <div className="pilot-panel fade-up">
             <div className="panel-head">
               <h2>Pilot sandbox</h2>
-              <p>Share this flow with a cohort in minutes.</p>
+              <p>Preview the exact moment a Change Manager sees.</p>
             </div>
             <div className="panel-body">
               {status && <p className="status-note">{status}</p>}
@@ -61,16 +61,24 @@ export default function BusinessApp() {
                 <div className="session-start">
                   <div>
                     <h3>Session start</h3>
-                    <p>What should this cohort practice today?</p>
+                    <p>What are you trying to do right now?</p>
                     <input
                       className="text-input"
-                      placeholder="e.g. Quarterly planning, onboarding"
+                      placeholder="e.g. Use Jira AI for backlog refinement"
                       value={goal}
                       onChange={(event) => setGoal(event.target.value)}
                     />
                   </div>
+                  <div className="system-context">
+                    <p>System context (auto-synced)</p>
+                    <div className="pill-row">
+                      <span className="pill">Role: Change Manager</span>
+                      <span className="pill">Tools: Jira + Confluence</span>
+                      <span className="pill">LMS history: synced</span>
+                    </div>
+                  </div>
                   <div className="time-row">
-                    <p>Session length</p>
+                    <p>Time available</p>
                     <div className="choice-chips">
                       {['5 min', '10 min', '15+ min'].map((option) => (
                         <button
@@ -84,7 +92,7 @@ export default function BusinessApp() {
                     </div>
                   </div>
                   <div className="confidence-row">
-                    <label htmlFor="confidence-business">Baseline confidence</label>
+                    <label htmlFor="confidence-business">Confidence (optional)</label>
                     <input
                       id="confidence-business"
                       type="range"
@@ -112,6 +120,20 @@ export default function BusinessApp() {
                     <button className="ghost small">Explain logic</button>
                   </div>
                   <p className="moment-prompt">{moment.prompt}</p>
+                  <div className="source-grid">
+                    <div>
+                      <p className="source-label">Sources</p>
+                      <p className="source-text">Internal Jira micro-learning</p>
+                    </div>
+                    <div>
+                      <p className="source-label">Context</p>
+                      <p className="source-text">Confluence change playbook</p>
+                    </div>
+                    <div>
+                      <p className="source-label">External</p>
+                      <p className="source-text">2-minute Atlassian explainer</p>
+                    </div>
+                  </div>
                   <div className="choice-chips">
                     {moment.choices.map((choice) => (
                       <button className="chip" key={choice}>
@@ -133,7 +155,7 @@ export default function BusinessApp() {
               {stage === 'feedback' && (
                 <div className="feedback-window">
                   <div>
-                    <h3>Feedback window</h3>
+                    <h3>How did that feel?</h3>
                     <p>{moment.feedbackPrompt}</p>
                     <div className="choice-chips">
                       {['Clear', 'Okay', 'Confusing'].map((choice) => (
@@ -152,12 +174,30 @@ export default function BusinessApp() {
               {stage === 'close' && (
                 <div className="session-close">
                   <h3>Session close</h3>
-                  <p>Capture a quick takeaway for the team pulse.</p>
+                  <p>You can confidently explain Jira AI for backlog refinement.</p>
                   <div className="choice-chips">
                     <button className="chip" onClick={() => setStage('moment')}>
                       Next moment
                     </button>
-                    <button className="chip">Archive feedback</button>
+                    <button className="chip">Schedule for later</button>
+                  </div>
+                  <div className="activity-feedback">
+                    <h4>Was this learning activity useful for your role?</h4>
+                    <div className="choice-chips">
+                      {['Yes', 'Partially', 'Not really'].map((choice) => (
+                        <button className="chip" key={choice}>
+                          {choice}
+                        </button>
+                      ))}
+                    </div>
+                    <p className="helper-text">If needed, pick one reason.</p>
+                    <div className="choice-chips">
+                      {['Too detailed', 'Too abstract', 'Hard to apply'].map((choice) => (
+                        <button className="chip" key={choice}>
+                          {choice}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
@@ -168,16 +208,16 @@ export default function BusinessApp() {
 
       <section className="grid">
         <div className="card">
-          <h2>Signals by cohort</h2>
-          <p>Track momentum across teams, locations, and learning tracks.</p>
+          <h2>Signals by role</h2>
+          <p>Compare adoption across change managers, PMs, and ops leads.</p>
         </div>
         <div className="card">
-          <h2>Transparent logic</h2>
-          <p>Explain every recommendation with human-readable reasoning.</p>
+          <h2>Trust-preserving adaptivity</h2>
+          <p>Separate struggle from disengagement to avoid false alarms.</p>
         </div>
         <div className="card">
-          <h2>Integrations ready</h2>
-          <p>Send events from LMS, Slack, or your internal workflow tools.</p>
+          <h2>Content unification</h2>
+          <p>Blend LMS, Confluence, and vendor docs into one moment.</p>
         </div>
       </section>
 
@@ -185,8 +225,8 @@ export default function BusinessApp() {
         <div>
           <h2>Designed for enablement leaders</h2>
           <p>
-            Launch adaptive programs with predictable timelines, then share
-            concrete progress with stakeholders.
+            Launch adaptive programs without rebuilding curriculum, then share
+            role-based impact with stakeholders.
           </p>
           <div className="pill-row">
             <span className="pill">SSO + SCIM</span>
@@ -197,9 +237,9 @@ export default function BusinessApp() {
         <div className="card">
           <h3>What teams get</h3>
           <ul>
-            <li>Adaptive learning moments tailored to role context.</li>
-            <li>Clear signals on retention, confidence, and readiness.</li>
-            <li>Evidence-led coaching that respects time budgets.</li>
+            <li>Internal + external content unified in one flow.</li>
+            <li>Automatic learner profiles built from signals, not surveys.</li>
+            <li>Respectful exits that keep high-capacity learners engaged.</li>
           </ul>
         </div>
       </section>

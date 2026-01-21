@@ -175,6 +175,19 @@ button:hover {
   gap: 16px;
 }
 
+.system-context {
+  display: grid;
+  gap: 8px;
+}
+
+.system-context p {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
 .status-note {
   margin: 0;
   color: var(--muted);
@@ -262,6 +275,27 @@ button:hover {
   color: var(--muted);
 }
 
+.source-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.source-label {
+  margin: 0 0 4px;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.source-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
 .choice-chips {
   display: flex;
   flex-wrap: wrap;
@@ -303,6 +337,25 @@ button:hover {
 .feedback-window h3 {
   margin: 0 0 8px;
   font-size: 0.95rem;
+}
+
+.activity-feedback {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--stroke);
+  display: grid;
+  gap: 10px;
+}
+
+.activity-feedback h4 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.helper-text {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
 }
 
 .grid {
