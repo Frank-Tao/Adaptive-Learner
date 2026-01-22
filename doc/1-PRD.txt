@@ -20,6 +20,14 @@ Disengagement response: reduce friction, offer recap or save-for-later, graceful
 Feedback window: quick micro-feedback to improve future moments.
 Session close: capability statement and next suggested moment.
 
+Typical Workflow (B2B)
+Entry: launch from company portal (SSO) with system-provided context (role, tool access, LMS history).
+Learning moment: unify internal Jira/Confluence content with a short external explainer.
+Struggle response: simplify and keep it interactive.
+Disengagement response: reduce demand, offer a 60-second summary, respect time pressure.
+Session close: capability statement plus optional one-tap activity feedback for role fit.
+Enterprise signals: content source attribution, role-aware outcomes, org-level insights.
+
 Non-Goals
 Building or delivering full courses.
 
@@ -29,10 +37,17 @@ Optimizing for surface engagement or completion alone.
 
 Target Users
 B2C learners in short-burst or focused sessions.
+B2B teams and enablement leaders who need role-aware, trust-preserving learning moments.
 
 Users with varied confidence, motivation, and context.
 
 Adaptive Player is designed for busy, self-directed adults who are actively trying to learn and apply skills but are constrained by time, uncertainty, or lack of clarity. These learners don’t need more content or courses—they need guidance on what to do next, in a way that fits their working style and builds real capability. Adaptive Player supports learners who are already motivated but underserved by static learning platforms and generic AI explanations.
+
+Website implementation guidelines
+B2C home site: self-serve, mobile-first, no org context, no dashboards or course language.
+B2C emphasis: quick application, personal confidence, graceful exits, optional one-tap activity feedback.
+B2B business site: SSO + LMS context, internal content unification, compliance language, role-based outcomes.
+B2B emphasis: separation of struggle vs disengagement, activity feedback tied to role fit, admin-level insights.
 
 Strategic sequencing (pragmatic roadmap)
 Phase 1 (Beachhead)

@@ -39,6 +39,7 @@ Never label learner states in the UI
 
 4. Workflow overview (typical)
 Session start: capture goal, time available, optional confidence.
+B2B session start: show system-provided context (role, tool access, LMS history) without asking for it.
 Learning moment micro-loop: render one action, capture signals, explain briefly, offer choices.
 Success response: reinforce and transfer, offer next step or exit.
 Struggle response: diagnose and adjust one variable at a time.
@@ -191,6 +192,8 @@ TimeSelector
 
 ConfidenceSlider (optional)
 
+SystemContextBadge (B2B, read-only)
+
 PrimaryCTA
 
 Layout
@@ -205,6 +208,8 @@ TimeSelector:
 - ButtonGroup: [2 min] [5 min] [10+ min]
 ConfidenceSlider:
 - Optional, 1–5, skippable
+SystemContextBadge:
+- Role, tool access, and LMS history surfaced as read-only chips
 PrimaryCTA:
 - “Start”
 Emitted Events
@@ -374,7 +379,39 @@ Emitted Events
   "event": "SESSION_END",
   "next_step_action": "continue | remind"
 }
-5. Implicit event capture (automatic)
+State 5 — Activity Feedback (Optional)
+Purpose: Improve adaptivity quality without evaluating the learner.
+
+Components
+ActivityFeedbackPrompt
+OneTapRating
+OptionalReasonChips
+
+UI
+
+ActivityFeedbackPrompt:
+- “Help improve this practice?” (B2C)
+- “Was this learning activity useful for your role?” (B2B)
+OneTapRating:
+- 👍 Worked well | 😐 Could be better | 👎 Didn’t help
+OptionalReasonChips:
+- Too basic | Too long | Not realistic enough (B2C)
+- Too detailed | Too abstract | Hard to apply (B2B)
+Emitted Events
+
+
+{
+  "event": "ACTIVITY_FEEDBACK",
+  "rating": "positive | neutral | negative",
+  "issue": "too_basic | too_long | not_realistic | too_detailed | too_abstract | hard_to_apply",
+  "context": {
+    "role": "string | null",
+    "learner_state": "success | struggle | disengagement",
+    "modality": "string",
+    "time_available_minutes": 5
+  }
+}
+6. Implicit event capture (automatic)
 These events are captured without UI prompts.
 
 Event
@@ -422,7 +459,7 @@ Example:
   "moment_id": "uuid",
   "timestamp": "ISO-8601"
 }
-6. Derived learner states (backend-only)
+7. Derived learner states (backend-only)
 Frontend never computes or displays these.
 
 Success
@@ -439,7 +476,7 @@ Modality effectiveness
 
 Frontend only emits raw interaction signals.
 
-7. “Why this?” microcopy contract
+8. “Why this?” microcopy contract
 UI Rule
 Collapsed by default
 
@@ -453,7 +490,7 @@ Example Payload
 {
   "why_this": "You’ve been learning in short bursts, and this step is about applying—not understanding—so a checklist should help you act quickly."
 }
-8. What NOT to build (explicit non-goals)
+9. What NOT to build (explicit non-goals)
 ❌ Onboarding questionnaires
 ❌ Learning style settings
 ❌ Profile dashboards
@@ -462,7 +499,7 @@ Example Payload
 
 These undermine trust and retention.
 
-9. Frontend–Backend contract (summary)
+10. Frontend–Backend contract (summary)
 Frontend sends
 
 UI events
@@ -485,7 +522,7 @@ Backend also returns
 - moment_type (e.g., transfer_prompt, diagnostic_adjust, low_friction)
 - explanation (short, benefit-framed)
 
-10. Technical readiness checklist
+11. Technical readiness checklist
 Before coding, confirm:
 
 Event schema agreed
@@ -500,7 +537,7 @@ Accessibility (keyboard, screen reader)
 
 Mobile-first breakpoints
 
-11. The Minimum Viable UI (what you actually need)
+12. The Minimum Viable UI (what you actually need)
 A. Session Start UI (≤ 10 seconds)
 Purpose: Establish context, not profile.
 
@@ -594,7 +631,7 @@ Example:
 
 This is metacognitive gold, but only when well-timed.
 
-12. How the UI supports adaptivity without exposing complexity
+13. How the UI supports adaptivity without exposing complexity
 “Why this?” UI (trust builder)
 A small, expandable affordance:
 
@@ -633,7 +670,7 @@ Example:
 
 This preserves agency without decision fatigue.
 
-13. Progressive learner profile (invisible but powerful)
+14. Progressive learner profile (invisible but powerful)
 From a UI perspective:
 
 There is no “profile setup”
@@ -654,7 +691,7 @@ A “What I’ve learned about you” summary
 
 But only after repeated value delivery
 
-14. Suggested UI layout (conceptual)
+15. Suggested UI layout (conceptual)
 
 
 ┌─────────────────────────────┐

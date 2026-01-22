@@ -6,6 +6,12 @@
 3. Start session: system creates session_id and loads the first Moment Card.
 4. Prompt Bar explains what will happen next in 1-2 lines.
 
+## Workflow 1B: Enterprise Entry (B2B)
+1. Entry via SSO portal or LMS deep link.
+2. System context pre-filled (role, tool access, LMS history).
+3. User confirms current goal and time available.
+4. First Moment Card blends internal and external sources.
+
 ## Workflow 2: Learning Moment Micro-Loop (Default)
 1. Moment Card shows a single step with a clear action.
 2. User attempts the step and optionally rates confidence.

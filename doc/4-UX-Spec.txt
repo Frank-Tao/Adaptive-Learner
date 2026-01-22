@@ -6,6 +6,14 @@ Respect attention: short, minimal interventions.
 
 No guilt, no nagging.
 
+B2C vs B2B experience cues
+B2C entry: self-serve, short time choices, personal goals, no org context.
+B2B entry: SSO portal launch with role, tool access, and LMS history pre-filled.
+B2C content: fully contained moments, no internal links required.
+B2B content: unify internal and external sources with source attribution.
+Struggle vs disengagement: keep separate tones ("Let’s simplify this" vs "Now might not be the best moment").
+Activity feedback: one-tap role-fit feedback after session close, optional and non-blocking.
+
 Core UI Patterns
 Moment Card: single learning moment with clear next action.
 

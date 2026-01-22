@@ -1,0 +1,497 @@
+User Story 1 — B2C (Primary v1)
+Persona
+Name: Alex
+Role: Senior Sales Executive
+Context: Outside work hours, self-driven career progression
+Goal: Improve negotiation skills to be ready for a bigger role at another company
+Constraint: Limited time, fragmented attention, no formal training support
+
+Scenario Narrative (End-to-End)
+Entry: “Leave workflow → return in 3 minutes”
+After dinner, Alex remembers a negotiation that didn’t go well earlier in the week.
+He opens Adaptive Player on his phone.
+
+UI State 0 — Session Start
+UI prompts (single screen):
+
+“What are you trying to do right now?”
+
+Alex types: “Get better at handling price objections.”
+
+Time selector: 5 min
+
+Optional confidence slider: 3 / 5
+
+Call to Action (CTA): Start
+
+Captured signals:
+
+Goal intent: applied skill
+
+Time constraint: short
+
+Confidence baseline: medium
+
+UI State 1 — Learning Moment (Adaptive)
+Rendered learning moment (implicit 6W):
+
+Format: Guided checklist
+
+Task:
+“Try this 3-step structure the next time a client pushes back on price.”
+
+Action:
+“Reframe → Probe → Anchor value”
+
+Optional hint: “Example phrasing”
+
+UI characteristics:
+
+One task
+
+No scrolling
+
+Clear action
+
+Why this works (optional, collapsed):
+
+“You’re short on time and focused on application, so this is designed to be used immediately.”
+
+UI State 2 — Feedback Loop
+After Alex completes the checklist:
+
+Feedback UI:
+
+“That’s a solid structure.”
+
+“How did that feel?”
+
+👍 Clear
+
+😐 Okay
+
+👎 Confusing
+
+Alex taps 😐 Okay.
+
+Signals captured:
+
+Partial clarity
+
+Effort present, not mastery
+
+UI State 3B — Struggle Adjustment (Adaptive)
+System inference (not shown):
+
+Procedural struggle
+
+Modality mismatch possible
+
+UI adjustment prompt:
+
+“What would help most right now?”
+
+Options:
+
+Walk through a real example
+
+See a short script
+
+Try a quick practice question
+
+Alex selects “Walk through a real example.”
+
+UI State 1 (Adjusted Moment)
+New learning moment:
+
+A short, realistic dialogue showing price objection handling
+
+One decision point (“What would you say next?”)
+
+Alex answers correctly without hints.
+
+UI State 3A — Success Reinforcement
+UI prompt:
+
+“Nice — you handled the objection cleanly.”
+
+Optional confidence check:
+
+“Could you do this again tomorrow?”
+
+Alex selects 4 / 5
+
+UI State 4 — Session Close
+Capability-based summary:
+
+“You can now respond to price objections using a clear 3-step structure.”
+
+Next suggestion (non-forcing):
+
+“When you have time: handling ‘We need approval’ objections.”
+
+Options:
+
+Continue
+
+Save for later
+
+Alex taps Save for later and closes the app.
+
+Follow-up (Nudge, later)
+The next evening, Adaptive Player sends a gentle nudge:
+
+“Want a 2-minute practice on handling ‘We need approval’ objections?”
+
+No guilt. No streak pressure.
+
+Why this is JIT (even outside workflow)
+Alex entered with a real problem
+
+The system respected time and context
+
+Learning was immediately applicable
+
+Exit was expected and supported
+
+ 
+
+ Mastery, Recovery & Reinforcement Flow — Alex’s 2nd scenario (B2C)
+UI State 1 — Learning Moment (Orchestrated)
+Adaptive Player orchestrates:
+
+A short, role-relevant negotiation scenario
+
+A guided decision checkpoint
+
+No external links (all contained)
+
+Rendered as a single learning moment:
+
+Format: Scenario-based application
+
+Task:
+
+“A client says: ‘Your price is higher than your competitors.’
+What do you say next?”
+
+Structure:
+
+One scenario
+
+One decision point
+
+One short response (typed or selected)
+
+Why this works (optional, collapsed):
+
+“You’re building fluency, so this focuses on applying the structure in a realistic moment.”
+
+UI State 2 — Feedback Loop
+After Alex submits his response:
+
+Feedback prompt:
+
+“How did that feel?”
+
+Options:
+
+👍 Clear
+
+😐 Okay
+
+👎 Confusing
+
+Alex selects: 👍 Clear
+
+Signals captured (not shown):
+
+Correct response
+
+First attempt success
+
+No hint usage
+
+Time-on-step within expected range
+
+Mastery Detected (Implicit)
+System inference (internal only):
+
+Procedural mastery emerging
+
+Confidence aligned with performance
+
+No friction indicators
+
+Decision:
+Proceed to reinforcement, not repetition.
+
+UI State 3A — Reinforcement (Mastery Path)
+UI message:
+
+“Nice — that response keeps the conversation focused on value.”
+
+Reinforcement prompt (transfer-focused):
+
+“How would you respond if the client added:
+‘We need internal approval before moving forward.’”
+
+Alex answers successfully.
+
+UI State 3A (Optional Confidence Calibration)
+Optional prompt:
+
+“How confident do you feel handling objections like this in a real call?”
+
+Scale:
+
+○1 ○2 ○3 ○4 ○5
+
+Alex selects: 4 / 5
+
+Signals captured:
+
+Confidence accuracy (aligned)
+
+Readiness for next complexity level
+
+Micro-Recovery (Preventive, Not Reactive)
+Even with mastery, the system performs a light recovery check:
+
+System decision (internal):
+
+Avoid adding complexity immediately
+
+Prevent overconfidence escalation
+
+Space reinforcement
+
+No UI interruption occurs.
+
+(This is important: recovery does not always mean visible adjustment.)
+
+UI State 4 — Session Close (Mastery-Framed)
+Capability-based summary:
+
+“You can now respond to common price objections using a clear, value-anchored structure.”
+
+Next suggested moments (optional):
+
+“Handling ‘We need approval’ objections”
+
+“Negotiating under deadline pressure”
+
+CTAs:
+
+Continue
+
+Save for later
+
+Alex selects Save for later and exits.
+
+Reinforcement Nudge (Delayed, Optional)
+Later that week, Adaptive Player sends one gentle reinforcement nudge:
+
+“Want a 2-minute practice on handling ‘We need approval’ objections?”
+
+If Alex ignores it:
+
+No follow-up
+
+No penalty
+
+No streak break
+
+Why this mastery flow matters
+Mastery is treated as a state to stabilize, not accelerate recklessly
+
+Reinforcement focuses on transfer, not repetition
+
+Recovery is preventive, not only reactive
+
+The learner exits feeling capable, not “finished”
+
+Parallelism with Other Flows (for your spec)
+Flow type
+
+Trigger
+
+Primary action
+
+Outcome
+
+Struggle
+
+Cognitive friction
+
+Simplify & adjust
+
+Recovery through support
+
+Disengagement
+
+Context constraint
+
+Reduce demand
+
+Recovery through respect
+
+Mastery
+
+Stable success
+
+Reinforce & transfer
+
+Capability consolidation
+
+All three:
+
+Use the same UI states
+
+Use different adaptive decisions
+
+Preserve learner agency
+
+Why this is critical for your product positioning
+This is what separates Adaptive Player from:
+
+chatbots (which keep answering)
+
+courses (which keep progressing)
+
+quizzes (which keep testing)
+
+Your system knows when to:
+
+teach
+
+support
+
+step back
+
+That judgment is the product.
+
+ 
+
+Added Step — Alex (B2C) Use Case
+New Step: Learning Activity Feedback
+Where it appears
+After UI State 4 — Session Close
+(before or alongside “Save for later”)
+
+UI State 5 — Activity Feedback (Alex)
+UI prompt:
+
+“Help improve this practice?”
+
+Options:
+
+👍 Worked well
+
+😐 Could be better
+
+👎 Didn’t help
+
+Alex selects 😐 Could be better.
+
+Follow-up (one tap):
+
+Too basic
+
+Too long
+
+Not realistic enough
+
+Alex selects Not realistic enough.
+
+What Adaptive Player captures (internal)
+
+
+ACTIVITY_FEEDBACK {
+  activity_id: "negotiation_objection_practice_v2",
+  rating: "neutral",
+  issue: "not_realistic",
+  context: {
+    learner_state: "mastery",
+    modality: "scenario_based",
+    time_available: 5
+  }
+}
+How the system uses it (not shown to Alex)
+Adjusts future scenario realism for Alex
+
+Increases weight of:
+
+real call transcripts
+
+higher-stakes scenarios
+
+Feeds evaluation module for:
+
+template tuning
+
+misfit detection
+
+Alex is not asked again for this session.
+
+Why this fits Alex’s journey
+He feels heard without being slowed down
+
+Feedback improves future moments
+
+No implication that he “failed”
+
+ 
+
+Why This Step Is Important (Strategically)
+This feedback step:
+
+Improves adaptivity quality
+
+Not just learner modeling, but activity modeling
+
+Protects UX
+
+Optional
+
+One tap
+
+Never interrupts flow
+
+Supports future enterprise value
+
+Learning design insights
+
+Role-based effectiveness analysis
+
+Evidence for “adaptive ROI”
+
+Avoids common traps
+
+Not NPS
+
+Not surveys
+
+Not “rate yourself”
+
+Where This Fits in Your Architecture
+This feeds directly into your:
+
+Evaluation module
+
+Moment template tuning
+
+Misclassification diagnostics
+
+Content source weighting
+
+Without touching:
+
+learner profile UI
+
+dashboards
+
+visible scoring
+
+One-line spec addition (you can paste this)
+After each learning session, Adaptive Player optionally collects one-tap feedback on the learning activity to improve future adaptivity and template effectiveness, without evaluating learner performance.

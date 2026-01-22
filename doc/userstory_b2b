@@ -1,0 +1,432 @@
+User Story 2 — B2B (Stage-2 Iteration)
+Persona
+Name: Priya
+Role: Change Manager
+Context: Leading a digital transformation program
+Goal: Quickly master Jira and Confluence (including AI features) to lead credibly
+Constraint: Heavy workload, fragmented schedule, internal systems already exist
+
+Scenario Narrative (End-to-End)
+Entry: Integrated but still moment-first
+Priya accesses Adaptive Player via a company learning portal link.
+
+UI State 0 — Session Start (Enterprise-aware)
+UI prompts:
+
+“What are you trying to do right now?”
+
+Priya selects a suggestion:
+“Understand how Jira AI can help with backlog refinement.”
+
+Time selector: 10+ min
+
+Confidence: 2 / 5
+
+CTA: Start
+
+Additional data (system-provided, not asked):
+
+Role: Change Manager
+
+Tool access: Jira + Confluence enabled
+
+Prior learning records pulled from LMS
+
+UI State 1 — Learning Moment (Orchestrated)
+Adaptive Player orchestrates:
+
+Internal Jira micro-learning
+
+One internal Confluence how-to page
+
+A short, external explainer (e.g., Atlassian video)
+
+Rendered as a single learning moment:
+
+Format: Guided walkthrough
+
+Task:
+“Use Jira AI to generate backlog refinement suggestions.”
+
+Clear steps with screenshots + optional video (2 min clip)
+
+Why this works (optional):
+
+“You’re preparing to lead others, so this focuses on practical use rather than configuration.”
+
+UI State 2 — Feedback Loop
+After attempting the task:
+
+Feedback prompt:
+
+“How did that feel?”
+
+👍 Clear
+
+😐 Okay
+
+👎 Confusing
+
+Priya selects 👎 Confusing.
+
+UI State 3B — Struggle Adjustment
+System inference:
+
+Conceptual + tool-navigation struggle
+
+UI adjustment:
+
+“Let’s simplify this.”
+
+Options:
+
+One concrete use case
+
+Short explainer (no clicks)
+
+Save and revisit later
+
+Priya selects One concrete use case.
+
+UI State 1 (Adjusted Moment)
+New moment:
+
+A single scenario:
+“You’re preparing a sprint planning meeting — here’s how Jira AI helps.”
+
+Step-by-step with reduced cognitive load
+
+Priya completes it successfully.
+
+UI State 3A — Success Reinforcement
+UI prompt:
+
+“You can now use Jira AI to support sprint planning discussions.”
+
+Confidence check: 3 / 5
+
+UI State 4 — Session Close
+Capability summary:
+
+“You can confidently explain and use Jira AI for backlog refinement.”
+
+Next suggestions:
+
+“Using Confluence AI for change communications”
+
+“Common pitfalls teams face with Jira AI”
+
+Options:
+
+Continue
+
+Schedule for later
+
+Enterprise-specific value unlocked
+Internal + external content unified
+
+No manual curriculum building
+
+Learner profile enriched automatically
+
+Same struggle/disengagement logic as B2C
+
+Why these user stories work for UI design
+Both stories:
+
+Start with one question + time
+
+Deliver one learning moment
+
+Show adaptive adjustment
+
+End with capability, not completion
+
+Avoid dashboards, profiles, or content lists
+
+Demonstrate JIT learning without tool integration dependency
+
+Disengagement Flow (Parallel to Struggle Adjustment)_ Priya’s 2nd Scenario (B2B)
+UI State 1 — Learning Moment (Orchestrated)
+Adaptive Player orchestrates:
+
+Internal Jira AI micro-learning
+
+One internal Confluence how-to page
+
+A short external explainer (e.g., Atlassian video, ≤2 min)
+
+Rendered as a single learning moment:
+
+Format: Guided walkthrough
+
+Task:
+
+“Use Jira AI to generate backlog refinement suggestions.”
+
+Structure:
+
+Step-by-step instructions
+
+Screenshots for key actions
+
+Optional short video (≤2 min)
+
+Why this works (optional, collapsed):
+
+“You’re preparing to lead others, so this focuses on practical use rather than configuration.”
+
+Disengagement Emerges (Implicit, Not Shown)
+During the learning moment, the system observes:
+
+Extended idle time without interaction
+
+App backgrounded and resumed multiple times
+
+No attempt submitted
+
+Time-on-step exceeds expected range
+
+System inference (internal only):
+
+Disengagement likely due to context switch or time pressure
+
+No evidence of conceptual failure
+
+UI State 3C — Disengagement De-Risk
+UI adjustment message:
+
+“Looks like now might not be the best moment.”
+
+(Neutral, situational framing — no blame.)
+
+Options presented:
+
+60-second summary
+
+Save and come back later
+
+Come back tomorrow
+
+Priya selects 60-second summary.
+
+UI State 1 — Adjusted Learning Moment (De-Risked)
+Rendered as a compressed learning moment:
+
+Format: Ultra-short explainer
+
+Content:
+
+“Jira AI analyzes recent sprints and ticket patterns to suggest backlog items, helping you guide sprint planning discussions more efficiently.”
+
+Characteristics:
+
+No clicks required
+
+No task completion expected
+
+One key idea only
+
+Why this works (optional):
+
+“This gives you the idea now, without asking for focus you may not have.”
+
+UI State 4 — Session Close (Disengagement Path)
+Capability-framed close:
+
+“You now understand how Jira AI supports backlog refinement at a high level.”
+
+Next suggested options (optional):
+
+“Try this hands-on when you have 10 minutes”
+
+“See one real sprint-planning example”
+
+CTAs:
+
+Remind me later
+
+End session
+
+Priya selects Remind me later.
+
+Follow-up Nudge (Optional, Deferred)
+At a later, low-risk time window, Adaptive Player may send one nudge:
+
+“When you have 5 minutes, want to see one real example of Jira AI in sprint planning?”
+
+If ignored:
+
+No escalation
+
+No repeated reminders
+
+No penalty
+
+Key Differences vs Struggle Flow (Important for Implementation)
+Aspect
+
+Struggle Adjustment
+
+Disengagement De-Risk
+
+Primary cause
+
+Cognitive / procedural friction
+
+Context / attention constraint
+
+Tone
+
+“Let’s simplify this”
+
+“Now might not be the best moment”
+
+Adjustment
+
+Change learning modality
+
+Reduce learning demand
+
+Revised moment
+
+Still interactive
+
+Passive, compressed
+
+Expectation
+
+Recovery through action
+
+Recovery through respect
+
+Outcome
+
+Re-engagement now
+
+Re-entry later
+
+Why this separation matters (product clarity)
+Prevents mislabeling disengagement as struggle
+
+Avoids frustrating high-capacity learners under pressure
+
+Preserves trust (especially critical in B2B contexts)
+
+Keeps your adaptive logic diagnostically honest
+
+Added Step — Priya (B2B) Use Case
+New Step: Learning Activity Feedback
+Where it appears
+After Session Close (both mastery and disengagement paths)
+
+UI State 5 — Activity Feedback (Priya)
+UI prompt:
+
+“Was this learning activity useful for your role?”
+
+Options:
+
+👍 Yes
+
+😐 Partially
+
+👎 Not really
+
+Priya selects 😐 Partially.
+
+Follow-up (one tap):
+
+Too detailed
+
+Too abstract
+
+Hard to apply right now
+
+Didn’t match my role
+
+Priya selects Hard to apply right now.
+
+What Adaptive Player captures (internal)
+
+
+ACTIVITY_FEEDBACK {
+  activity_id: "jira_ai_backlog_refinement_v1",
+  rating: "partial",
+  issue: "hard_to_apply",
+  context: {
+    role: "change_manager",
+    learner_state: "disengagement",
+    modality: "guided_walkthrough",
+    time_available: 10
+  }
+}
+How the system uses it (not shown to Priya)
+For Priya:
+
+Prioritizes use-case framing over feature walkthroughs
+
+For the organization (later stage):
+
+Flags this activity as “high friction for change roles”
+
+Feeds enterprise learning design improvements
+
+For Adaptive Player:
+
+Improves struggle vs disengagement discrimination
+
+No follow-up questions. No explanation required.
+
+Why This Step Is Important (Strategically)
+This feedback step:
+
+Improves adaptivity quality
+
+Not just learner modeling, but activity modeling
+
+Protects UX
+
+Optional
+
+One tap
+
+Never interrupts flow
+
+Supports future enterprise value
+
+Learning design insights
+
+Role-based effectiveness analysis
+
+Evidence for “adaptive ROI”
+
+Avoids common traps
+
+Not NPS
+
+Not surveys
+
+Not “rate yourself”
+
+Where This Fits in Your Architecture
+This feeds directly into your:
+
+Evaluation module
+
+Moment template tuning
+
+Misclassification diagnostics
+
+Content source weighting
+
+Without touching:
+
+learner profile UI
+
+dashboards
+
+visible scoring
+
+One-line spec addition (you can paste this)
+After each learning session, Adaptive Player optionally collects one-tap feedback on the learning activity to improve future adaptivity and template effectiveness, without evaluating learner performance.
