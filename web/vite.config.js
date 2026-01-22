@@ -16,7 +16,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         consumer: resolve(__dirname, 'index.html'),
-        business: resolve(__dirname, 'business.html')
+        business: resolve(__dirname, 'biz/index.html')
       }
     }
   }
