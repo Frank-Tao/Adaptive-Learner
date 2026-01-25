@@ -4,6 +4,7 @@ dist/
 .env.*
 .DS_Store
 Thumbs.db
+DG1__DS_DIR_HDR
 .vscode/
 .idea/
 .codex/
