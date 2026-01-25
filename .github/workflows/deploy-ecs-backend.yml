@@ -1,0 +1,89 @@
+name: Deploy Backend to ECS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - backend/**
+      - .github/ecs-task-definition.template.json
+      - .github/workflows/deploy-ecs-backend.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
+      ECS_CLUSTER: ${{ secrets.AWS_ECS_CLUSTER }}
+      ECS_SERVICE: ${{ secrets.AWS_ECS_SERVICE }}
+      ECS_TASK_EXECUTION_ROLE_ARN: ${{ secrets.AWS_ECS_EXECUTION_ROLE_ARN }}
+      ECS_TASK_ROLE_ARN: ${{ secrets.AWS_ECS_TASK_ROLE_ARN }}
+      ECS_LOG_GROUP: ${{ secrets.AWS_ECS_LOG_GROUP }}
+      CONTAINER_NAME: adaptive-learning-backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push image
+        id: build-image
+        run: |
+          IMAGE_TAG=${GITHUB_SHA}
+          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${ECR_REPOSITORY}:${IMAGE_TAG}
+          docker build -t ${IMAGE_URI} -f backend/Dockerfile backend
+          docker push ${IMAGE_URI}
+          echo "image=${IMAGE_URI}" >> $GITHUB_OUTPUT
+
+      - name: Render task definition
+        run: |
+          python - <<'PY'
+          import os
+
+          template_path = ".github/ecs-task-definition.template.json"
+          output_path = ".github/ecs-task-definition.json"
+          replacements = {
+              "__ECS_EXECUTION_ROLE_ARN__": os.environ["ECS_TASK_EXECUTION_ROLE_ARN"],
+              "__ECS_TASK_ROLE_ARN__": os.environ["ECS_TASK_ROLE_ARN"],
+              "__ECS_LOG_GROUP__": os.environ["ECS_LOG_GROUP"],
+              "__AWS_REGION__": os.environ["AWS_REGION"],
+          }
+
+          with open(template_path, "r", encoding="utf-8") as handle:
+              content = handle.read()
+
+          for token, value in replacements.items():
+              content = content.replace(token, value)
+
+          with open(output_path, "w", encoding="utf-8") as handle:
+              handle.write(content)
+          PY
+
+      - name: Fill in the new image ID
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: .github/ecs-task-definition.json
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy to Amazon ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
