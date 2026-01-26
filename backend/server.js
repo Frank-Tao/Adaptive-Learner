@@ -5,6 +5,8 @@ import { handler as classifyHandler } from './handlers/classify.js';
 import { handler as nextMomentHandler } from './handlers/next-moment.js';
 import { handler as metricsHandler } from './handlers/metrics.js';
 import { handler as profileHandler } from './handlers/profile.js';
+import { handler as orchestrateHandler } from './handlers/orchestrate.js';
+import { handler as summarizeUrlHandler } from './handlers/summarize-url.js';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -61,6 +63,8 @@ app.post('/next-moment', wrapHandler(nextMomentHandler));
 app.post('/profile', wrapHandler(profileHandler));
 app.get('/metrics', wrapHandler(metricsHandler));
 app.post('/chatgpt', wrapHandler(chatgptHandler));
+app.post('/orchestrate', wrapHandler(orchestrateHandler));
+app.post('/summarize-url', wrapHandler(summarizeUrlHandler));
 
 const port = Number(process.env.PORT || 3000);
 const host = process.env.HOST || '0.0.0.0';
