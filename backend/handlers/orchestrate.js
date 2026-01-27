@@ -1,4 +1,4 @@
-import { runOrchestrator } from '../agents/index.js';
+import { runAgent, runOrchestrator } from '../agents/index.js';
 
 export async function handler(event) {
   try {
@@ -13,7 +13,21 @@ export async function handler(event) {
       availableAgents: payload.available_agents || []
     });
 
-    return jsonResponse(200, result);
+    const decision = parseDecision(result?.content);
+    if (payload.execute === true && decision?.agent_id && decision.agent_id !== 'orchestrator') {
+      const execution = await runAgent(decision.agent_id, payload.agent_payload || {});
+      return jsonResponse(200, {
+        decision,
+        execution,
+        usage: result?.usage ?? null
+      });
+    }
+
+    return jsonResponse(200, {
+      decision,
+      raw: result?.content ?? '',
+      usage: result?.usage ?? null
+    });
   } catch (error) {
     return jsonResponse(500, { error: error.message || 'Server error' });
   }
@@ -29,4 +43,15 @@ function jsonResponse(statusCode, body) {
     },
     body: JSON.stringify(body)
   };
+}
+
+function parseDecision(content) {
+  if (!content || typeof content !== 'string') {
+    return null;
+  }
+  try {
+    return JSON.parse(content);
+  } catch {
+    return null;
+  }
 }

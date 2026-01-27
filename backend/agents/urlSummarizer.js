@@ -1,16 +1,20 @@
 import { createChatCompletion } from '../lib/openai.js';
 import { fetchUrlText } from '../tools/index.js';
-import { loadPrompt } from './promptLoader.js';
+import { loadPromptWithPolicies } from './promptLoader.js';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 const DEFAULT_MODEL = 'gpt-4o-mini';
-const PROMPT_PATH = 'backend/prompts/url-summarizer.txt';
+const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const PROMPT_PATH = path.join(ROOT_DIR, 'prompts', 'url-summarizer.txt');
+const POLICY_PATHS = [path.join(ROOT_DIR, 'policies', 'guardrails.txt')];
 
 export async function runUrlSummarizer({ url, audience = 'general' }) {
   if (!url) {
     throw new Error('url is required');
   }
 
-  const prompt = await loadPrompt(PROMPT_PATH);
+  const prompt = await loadPromptWithPolicies(PROMPT_PATH, POLICY_PATHS);
   const page = await fetchUrlText(url);
 
   const messages = [

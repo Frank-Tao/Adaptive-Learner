@@ -12,7 +12,10 @@ export async function handler(event) {
       audience: payload.audience
     });
 
-    return jsonResponse(200, result);
+    return jsonResponse(200, {
+      summary: result?.content ?? '',
+      usage: result?.usage ?? null
+    });
   } catch (error) {
     return jsonResponse(500, { error: error.message || 'Server error' });
   }
