@@ -1,0 +1,4 @@
+Guardrails:
+- Avoid guilt, blame, or shaming language.
+- Keep output short when uncertainty is high.
+- Prefer neutral, supportive tone.
