@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Adaptive Learner</title>
+    <link rel="stylesheet" href="side-panel.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <header class="panel__header">
+        <div>
+          <p class="panel__eyebrow">Adaptive Learner</p>
+          <h1 class="panel__title">Side Panel</h1>
+        </div>
+        <button class="icon-button" id="clearButton" type="button" aria-label="Clear content">Clear</button>
+      </header>
+
+      <section class="panel__card panel__card--lift">
+        <div class="panel__card-header">
+          <h2>Drop content</h2>
+          <button class="ghost-button" id="grabSelectionButton" type="button">Use selection</button>
+        </div>
+        <p class="panel__hint">Drag highlighted text here, or paste it. Use short snippets for better clarity.</p>
+        <textarea id="contentInput" class="panel__input" placeholder="Drop or paste content to summarize." rows="8"></textarea>
+      </section>
+
+      <section class="panel__card">
+        <div class="panel__card-header">
+          <h2>Ask a question</h2>
+        </div>
+        <input id="questionInput" class="panel__input" type="text" placeholder="What do you want to understand?" />
+      </section>
+
+      <section class="panel__actions">
+        <button class="primary-button" id="summarizeButton" type="button">Summarize</button>
+        <button class="secondary-button" id="askButton" type="button">Ask</button>
+      </section>
+
+      <section class="panel__card panel__card--output" aria-live="polite">
+        <div class="panel__card-header">
+          <h2>Response</h2>
+          <span class="panel__status" id="statusLabel">Idle</span>
+        </div>
+        <div id="responseOutput" class="panel__output">Drop content, then choose an action.</div>
+      </section>
+
+      <section class="panel__card panel__card--settings">
+        <div class="panel__card-header">
+          <h2>Backend</h2>
+        </div>
+        <label class="panel__label" for="backendUrlInput">API base URL</label>
+        <input id="backendUrlInput" class="panel__input" type="url" placeholder="http://localhost:3000" />
+        <button class="ghost-button" id="saveSettingsButton" type="button">Save</button>
+      </section>
+    </main>
+
+    <script src="side-panel.js"></script>
+  </body>
+</html>
